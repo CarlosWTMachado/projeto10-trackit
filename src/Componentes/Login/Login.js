@@ -46,7 +46,6 @@ const LoginContainer = styled.div`
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	background-color: #E5E5E5;
 	font-family: 'Lexend Deca', sans-serif;
 `;
 
