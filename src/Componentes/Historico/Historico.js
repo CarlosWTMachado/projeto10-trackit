@@ -3,8 +3,21 @@ import Footer from "../Footer";
 
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 export default function Historico () {
+	const config = {
+		headers: { Authorization: `Bearer ${localStorage.getItem('trackItToken')}` }
+	};
+
+	function getHistoric () {
+		const promise = axios.get ('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/history/daily', config);
+		promise.then (response => {
+			const {data} = response;
+			console.log(data);
+		})
+		promise.catch (error => console.log(error));
+	}
 	return (
 		<>
 			<Header />
