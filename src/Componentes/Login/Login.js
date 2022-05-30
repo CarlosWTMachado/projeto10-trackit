@@ -1,11 +1,13 @@
 import logo from "../../Assets/logo.png"
 import { Link } from "react-router-dom";
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import React from 'react';
 import styled from "styled-components";
 
 export default function Login () {
+	const navigate = useNavigate();
 	const [form, setForm] = useState({
 		email: '',
 		password: '',
@@ -21,10 +23,15 @@ export default function Login () {
 		console.log(form.password);
 
 		const promisse = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', {email: form.email, password: form.password});
-		promisse.then((response) => console.log(response.data))
+		promisse.then((response) => {
+			const {data} = response;
+			console.log(data)
+			localStorage.setItem('trackItToken', data.token);
+			navigate ('/habitos',{state: {
+				image: data.image,
+			}});
+		})
 		.catch(error => console.log(error));
-		
-		
 	}
 
 	return (
